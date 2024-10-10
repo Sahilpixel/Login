@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            width: 100%;
+            background-color: #6e8efb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>User Login</h2>
+        <button onclick="loginWithGoogle()">Login with Google</button>
+        <button onclick="createNewAccount()">Create a New Account</button>
+    </div>
+
+    <script>
+        function loginWithGoogle() {
+            const id = prompt("Enter your ID:");
+            const pass = prompt("Enter your password:");
+            
+            fetch('http://localhost:8080/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id, pass })
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => alert('Error: ' + error));
+        }
+
+        function createNewAccount() {
+            const id = prompt("Enter your ID:");
+            const pass = prompt("Enter your password:");
+            
+            fetch('http://localhost:8080/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ id, pass })
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => alert('Error: ' + error));
+        }
+    </script>
+</body>
+</html>
